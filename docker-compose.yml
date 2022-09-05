@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  comic_library_db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=comic_library_db
+      - POSTGRES_USER=spodermon
+      - POSTGRES_PASSWORD=guesswat
+    ports:
+      - 5432:5432
+    volumes:
+      - .docker/volumes/comiclibrary/comic_library_db:/var/lib/postgresql/data
