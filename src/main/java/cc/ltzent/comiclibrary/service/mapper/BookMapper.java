@@ -11,4 +11,6 @@ import java.util.List;
 public interface BookMapper {
     List<Book> entityListToDomainList(Collection<BookEntity> entities);
     Book entityToDomain(BookEntity entity);
+
+    BookEntity domainToEntity(Book book);
 }

@@ -6,5 +6,6 @@ import java.util.Collection;
 
 public interface BookService {
 
-    Collection<Book> getBooks();
+    Collection<Book> search(Book book);
+    Book save(Book book);
 }

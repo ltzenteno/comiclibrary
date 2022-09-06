@@ -1,6 +1,7 @@
 package cc.ltzent.comiclibrary.service.impl;
 
 import cc.ltzent.comiclibrary.domain.Book;
+import cc.ltzent.comiclibrary.persistence.entity.BookEntity;
 import cc.ltzent.comiclibrary.persistence.repository.BookRepository;
 import cc.ltzent.comiclibrary.service.BookService;
 import cc.ltzent.comiclibrary.service.mapper.BookMapper;
@@ -19,7 +20,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = true)
-    public Collection<Book> getBooks() {
-        return bookMapper.entityListToDomainList(bookRepository.findAll());
+    public Collection<Book> search(Book book) {
+        return bookMapper.entityListToDomainList(bookRepository.getBooks(book));
+    }
+
+    @Override
+    public Book save(Book book) {
+        BookEntity newEntity = bookMapper.domainToEntity(book);
+        return bookMapper.entityToDomain(bookRepository.save(newEntity));
     }
 }
