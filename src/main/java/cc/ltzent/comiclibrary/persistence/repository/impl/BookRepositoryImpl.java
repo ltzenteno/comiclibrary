@@ -34,7 +34,17 @@ public class BookRepositoryImpl implements CustomBookRepository {
             predicates.add(cb.like(cb.upper(root.get("name")), "%" + book.getName().toUpperCase() + "%"));
         }
 
-        // TODO: add all predicates
+        if (book.getAuthor() != null && !book.getAuthor().isEmpty()) {
+            predicates.add(cb.like(cb.upper(root.get("author")), "%" + book.getAuthor() + "%"));
+        }
+
+        if (book.getIsbn() != null && !book.getIsbn().isEmpty()) {
+            predicates.add(cb.equal(root.get("isbn"), book.getIsbn()));
+        }
+
+        if (book.getCategory() != null && !book.getCategory().isEmpty()) {
+            predicates.add(cb.equal(root.get("category"), book.getCategory()));
+        }
 
         query.where(predicates.toArray(new Predicate[0]));
 
