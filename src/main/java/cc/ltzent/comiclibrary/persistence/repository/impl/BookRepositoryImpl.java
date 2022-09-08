@@ -4,15 +4,18 @@ import cc.ltzent.comiclibrary.domain.Book;
 import cc.ltzent.comiclibrary.persistence.entity.BookEntity;
 import cc.ltzent.comiclibrary.persistence.repository.CustomBookRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -22,7 +25,7 @@ public class BookRepositoryImpl implements CustomBookRepository {
     private final EntityManager entityManager;
 
     @Override
-    public Collection<BookEntity> getBooks(Book book) {
+    public Page<BookEntity> getBooks(Book book, Pageable pageable) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<BookEntity> query = cb.createQuery(BookEntity.class);
@@ -48,6 +51,12 @@ public class BookRepositoryImpl implements CustomBookRepository {
 
         query.where(predicates.toArray(new Predicate[0]));
 
-        return entityManager.createQuery(query).getResultList();
+        // TODO: add here order by
+
+        // generate paginated response
+        TypedQuery<BookEntity> typedQuery = entityManager.createQuery(query);
+        List<BookEntity> resultList = typedQuery.getResultList();
+
+        return new PageImpl<>(resultList, pageable, resultList.size());
     }
 }
