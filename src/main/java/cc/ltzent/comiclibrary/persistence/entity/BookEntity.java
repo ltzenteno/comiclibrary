@@ -33,4 +33,15 @@ public class BookEntity {
     private String category;
     private String isbn;
     private String author;
+
+    @Override
+    public String toString() {
+        return "BookEntity{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
 }

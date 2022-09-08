@@ -2,9 +2,10 @@ package cc.ltzent.comiclibrary.persistence.repository;
 
 import cc.ltzent.comiclibrary.domain.Book;
 import cc.ltzent.comiclibrary.persistence.entity.BookEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.Collection;
 
 public interface CustomBookRepository {
-    Collection<BookEntity> getBooks(Book book);
+    Page<BookEntity> getBooks(Book book, Pageable pageable);
 }
