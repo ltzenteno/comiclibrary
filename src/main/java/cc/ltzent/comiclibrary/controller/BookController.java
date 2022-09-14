@@ -5,7 +5,6 @@ import cc.ltzent.comiclibrary.domain.page.CustomPageRequest;
 import cc.ltzent.comiclibrary.domain.page.CustomPageResponse;
 import cc.ltzent.comiclibrary.service.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
